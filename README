@@ -1,0 +1,22 @@
+Binary firmware for ASpeed Technologies graphics chips
+======================================================
+
+This package contains the binary firmware for ASpeed Technologies graphics chips
+supported by the xserver-xorg-video-ast driver.
+
+When updating the initramfs image on systems with an ASpeed BMC (such as all
+IPMI devices on Supermicro mainboards since 2015 to today) the following warning
+can be seen:
+
+  W: Possible missing firmware /lib/firmware/ast_dp501_fw.bin for module ast
+
+The ast_dp501_fw.bin firmware can be created from the hexdump in
+src/ast_dp501fw.h of xf86-video-ast with:
+
+  grep ^0x ast_dp501fw.h  | sed -e 's|,};$|,|' | xxd -r -p - ast_dp501_fw.bin
+
+The upstream git repository of xf86-video-ast can be found at:
+
+  https://gitlab.freedesktop.org/xorg/driver/xf86-video-ast
+
+ -- Daniel Baumann <daniel.baumann@progress-linux.org>  Sat, 13 Mar 2021 06:34:23 +0100
